@@ -1,0 +1,115 @@
+<!DOCTYPE html>  <html lang="bn">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Product Order</title>  <style>  
+body{  
+font-family: Arial;  
+background:#f2f2f2;  
+padding:20px;  
+}  
+  
+.container{  
+max-width:400px;  
+margin:auto;  
+background:white;  
+padding:20px;  
+border-radius:10px;  
+}  
+  
+h2{  
+text-align:center;  
+}  
+  
+input,select{  
+width:100%;  
+padding:10px;  
+margin-top:8px;  
+margin-bottom:15px;  
+border:1px solid #ccc;  
+border-radius:5px;  
+}  
+  
+button{  
+width:100%;  
+padding:12px;  
+background:#28a745;  
+color:white;  
+border:none;  
+border-radius:5px;  
+font-size:16px;  
+cursor:pointer;  
+}  
+</style>  </head>  <body>  <div class="container">  <h2>Product Order</h2>  <form id="orderForm">  <label>👤 নাম</label>
+<input type="text" id="name" required>
+
+<label>📏 সাইজ</label>
+<select id="size">
+
+<option>S</option>  
+<option>M</option>  
+<option>L</option>  
+<option>XL</option>  
+</select>  <label>📞 মোবাইল নাম্বার</label>
+<input type="text" id="phone" required>
+
+<label>জেলা</label>
+<input type="text" id="district">
+
+<label>উপজেলা</label>
+<input type="text" id="upazila">
+
+<label>গ্রাম</label>
+<input type="text" id="village">
+
+<label>🏠 ঠিকানা</label>
+<input type="text" id="address">
+
+<button type="submit">Order Confirm</button>
+
+</form>  </div>  <script>  
+  
+const botToken = "8678473013:AAHDbWBB888eQGJnoNfAvIWH6wqMki0JaQ0";  
+const chatId = "7345400261";  
+  
+document.getElementById("orderForm").addEventListener("submit",function(e){  
+  
+e.preventDefault();  
+  
+let name = document.getElementById("name").value;  
+let size = document.getElementById("size").value;  
+let phone = document.getElementById("phone").value;  
+let district = document.getElementById("district").value;  
+let upazila = document.getElementById("upazila").value;  
+let village = document.getElementById("village").value;  
+let address = document.getElementById("address").value;  
+  
+let message = `  
+🛒 New Order  
+  
+👤 নাম: ${name}  
+📏 সাইজ: ${size}  
+📞 ফোন: ${phone}  
+জেলা: ${district}  
+উপজেলা: ${upazila}  
+গ্রাম: ${village}  
+🏠 ঠিকানা: ${address}  
+`;  
+  
+fetch(`https://api.telegram.org/bot${botToken}/sendMessage`,{  
+method:"POST",  
+headers:{  
+"Content-Type":"application/json"  
+},  
+body:JSON.stringify({  
+chat_id:chatId,  
+text:message  
+})  
+});  
+  
+alert("Order Submitted!");  
+  
+});  
+  
+</script>  </body>  
+</html>
